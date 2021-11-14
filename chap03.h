@@ -36,3 +36,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
+
+
+#define SA struct sockaddr
+
+#define MAX 80
+
+#define PORT 8080
