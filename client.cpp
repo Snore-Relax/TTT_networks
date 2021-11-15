@@ -15,30 +15,32 @@ void drawBoard(){ //this draw the tic tac toe board
 
 }
 
+
 void linkServer(int sockfd)
 {
-	char msg[MAX];
-	int n;
-    //while(true){
-		bzero(msg, sizeof(msg));
-		printf("Enter message: %s", msg);
-		n = 0;
-		//while ((msg[n++] = getchar()) != '\n')
-			//;		
-		write(sockfd, msg, sizeof(msg));
+	    char msg[MAX];
+        int n;
+    
 		bzero(msg, sizeof(msg));
 		read(sockfd, msg, sizeof(msg));
-		//printf("From Server : %s", msg);
+        n = 0;
+        while ((msg[n++] = getchar()) != '\n')
+            ;
+		
+		bzero(msg, sizeof(msg));
+		read(sockfd, msg, sizeof(msg));
+		printf("Sending to server : %s", msg);
 		if ((strncmp(msg, "exit", 4)) == 0) {
 			printf("Client Exit...\n");
-			
+			//break;
 		}
-        
-    //}
+    
+	
 }
 
 
-void Game(){
+
+void Game(int sockfd){
 
     cout << "Tic tac toe ver2. \n";
     cout <<"Directions: Select a number to place your marker on the board.\n\n";
@@ -65,7 +67,10 @@ void Game(){
     while(i <= 9){
         i++;
 
+    char msg[10];
     int pos;
+    sockfd = atoi(msg);
+    sockfd = pos;
          
         if (currentP == 1){
             cout << "It is Player 1's turn. Select a number: ";
@@ -80,7 +85,7 @@ void Game(){
             cout << "It is computer's turn. Selecting position: ";
             pos = (rand() % 9) + 1;
             // client function. 
-             linkServer(pos);
+            linkServer(pos);
             printf("Computer will place a marker on %d.\n", pos);
     
         }
@@ -102,12 +107,12 @@ void Game(){
 
 
         if(scanWin() == 'X' ){
-            cout << " *** Player 1 has won! *** \n\n";
+            cout << " * Player 1 has won! * \n\n";
             break;  
         }
         
         else if(scanWin() == 'O' ){
-            cout << " *** Computer has won! *** \n\n";
+            cout << " * Computer has won! * \n\n";
             break;
         }
 
@@ -153,7 +158,7 @@ int main(){
     else
         printf("connected to the server..\n");
     
-    Game();
+    Game(sockfd);
   
 
     // close the socket
