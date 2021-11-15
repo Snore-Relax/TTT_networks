@@ -8,26 +8,27 @@ void linkClient(int sockfd)
     char msg[MAX];
     int n;
     // infinite loop for chat
-    while(true) {
+    //while(true) {
         bzero(msg, MAX);
-   
         // read the message from client and copy it in buffer
         read(sockfd, msg, sizeof(msg));
         // print buffer which contains the client contents
-        //printf("From client: %s\t To client : ", msg);
         printf("From client: %s\t", msg);
         bzero(msg, MAX);
         n = 0;
+
+        printf("Storing Data");
         // copy server message in the buffer
+        /*
         while ((msg[n++] = getchar()) != '\n')
         ;
-   
+        */
         // and send that buffer to client
         //write(sockfd, msg, sizeof(msg));
    
         // if msg contains "Exit" then server exit and chat ended.
         
-    }
+    //}
 }
    
 // Driver function
